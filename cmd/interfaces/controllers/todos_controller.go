@@ -3,7 +3,6 @@ package controllers
 import (
 	"net/http"
 	"strconv"
-	"time"
 	"todo_app/cmd/domain"
 	"todo_app/cmd/interfaces/database"
 	"todo_app/cmd/usecase"
@@ -55,8 +54,6 @@ func (controller TodosController) Create(c Context) (err error) {
 	if err = c.Bind(todo); err != nil {
 		return
 	}
-	todo.CreatedAt = time.Now()
-	todo.UpdatedAt = time.Now()
 	err = controller.Interactor.AddTodo(todo)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
@@ -78,7 +75,6 @@ func (controller TodosController) Update(c Context) (err error) {
 	}
 
 	todo.ID = id
-	todo.UpdatedAt = time.Now()
 	err = controller.Interactor.UpdateTodo(todo)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
@@ -96,7 +92,6 @@ func (controller TodosController) Destroy(c Context) (err error) {
 		return
 	}
 	todo.ID = id
-	todo.DeletedAt = time.Now()
 
 	err = controller.Interactor.DeleteTodo(todo)
 	if err != nil {

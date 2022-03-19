@@ -10,7 +10,7 @@ type TodoInteractor struct {
 }
 
 func (interactor *TodoInteractor) Todos() (todos domain.Todos, err error) {
-	todos, err = interactor.TodoRepository.FindAllWithCategory()
+	todos, err = interactor.TodoRepository.FindAll()
 	return
 }
 
@@ -20,7 +20,7 @@ func (interactor *TodoInteractor) TodoById(id string) (todo domain.Todo, err err
 	if err != nil {
 		return
 	}
-	todo, err = interactor.TodoRepository.FindByIdWithCategory(idInt)
+	todo, err = interactor.TodoRepository.FindById(idInt)
 	return
 }
 

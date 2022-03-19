@@ -10,6 +10,7 @@ import (
 func Init() {
 	router := echo.New()
 
+	router.Use(middleware.CORS())
 	router.Use(middleware.Logger())
 	router.Use(middleware.Recover())
 
